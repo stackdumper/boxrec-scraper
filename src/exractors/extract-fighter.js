@@ -25,7 +25,13 @@ const labelKeys = {
 }
 
 const processors = {
-  'born': R.take(9)
+  'born': R.pipe(
+    R.take(9),
+    R.pipe(
+      R.split('-'),
+      date => new Date(...date),
+    )
+  )
 }
 
 export const extractFighter = () => async (html) => {

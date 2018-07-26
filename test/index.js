@@ -13,6 +13,11 @@ test.beforeEach((t) => {
 })
 
 test('initialization', (t) => {
+  console.log(
+    '1994-02-0'.split('-').map
+    
+  );
+  
   const { boxrecScraper } = t.context
   t.truthy(boxrecScraper)
 
@@ -131,7 +136,7 @@ test('scrap fighter', async (t) => {
   const { boxrecScraper } = t.context
 
   const fighter = await boxrecScraper.scrapers.scrapFighter('474')
-
+  
   t.deepEqual(fighter, {
     id: '474',
     role: 'boxer',
@@ -139,7 +144,7 @@ test('scrap fighter', async (t) => {
     rounds: '215',
     KOs: '76%',
     status: 'inactive',
-    born: '1966-06-3',
+    born: new Date(1966, 6, 3),
     nationality: 'USA',
     debut: '1985-03-06',
     division: 'heavyweight',
