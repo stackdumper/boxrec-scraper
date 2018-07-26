@@ -1,0 +1,35 @@
+{
+  "name": "boxrec-scraper",
+  "version": "1.0.0-beta.2",
+  "main": "build/index.js",
+  "author": "stackdumper <stackdumper@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "test": "ava test -v",
+    "lint": "eslint src/**/*.js",
+    "build": "rollup -c",
+    "prepublish": "yarn build"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "jsdom": "^11.11.0",
+    "promised-pipe": "^1.1.1",
+    "ramda": "^0.25.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "@atomix/eslint-config": "^6.4.0",
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/node": "^7.0.0-beta.54",
+    "@babel/preset-env": "^7.0.0-beta.54",
+    "@babel/preset-stage-1": "^7.0.0-beta.54",
+    "ava": "^1.0.0-beta.6",
+    "babel-eslint": "^9.0.0-beta.3",
+    "eslint": "^5.0.0-rc.0",
+    "rollup": "^0.63.4",
+    "rollup-plugin-babel": "^4.0.0-beta.7",
+    "rollup-plugin-babel-minify": "^5.0.0",
+    "semver": "^5.5.0"
+  }
+}

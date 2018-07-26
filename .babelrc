@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "@babel/preset-stage-1",
+    ["@babel/preset-env", {
+      "modules": false,
+      "targets": {
+        "node": "6.11.5"
+      }
+    }]
+  ]
+}
