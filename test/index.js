@@ -1,7 +1,19 @@
 import test from 'ava'
-import { boxrecScraper } from '../'
+import { createBoxrecScraper } from '../'
+
+const config = {
+  auth: {
+    email: 'stackdumper',
+    password: 'unsafe_password'
+  }
+}
+
+test.beforeEach((t) => {
+  t.context.boxrecScraper = createBoxrecScraper(config)
+})
 
 test('initialization', (t) => {
+  const { boxrecScraper } = t.context
   t.truthy(boxrecScraper)
 
   // check scrapers
@@ -21,11 +33,20 @@ test('initialization', (t) => {
 })
 
 test('config', (t) => {
+  const { boxrecScraper } = t.context
+
+  // check config existence
   t.truthy(boxrecScraper.defaultConfig)
   t.truthy(boxrecScraper.config)
 
+
+  // reseted config should be equal to default config
+  boxrecScraper.resetConfig()
+
   t.deepEqual(boxrecScraper.config, boxrecScraper.defaultConfig)
 
+
+  // providing new config
   const newConfig = {
     url: 'updated',
     routes: {},
@@ -34,11 +55,17 @@ test('config', (t) => {
 
   boxrecScraper.configure(newConfig)
 
+  // should equal new config and not equal default config
   t.deepEqual(boxrecScraper.config, newConfig)
   t.notDeepEqual(boxrecScraper.config, boxrecScraper.defaultConfig)
+
+
+  // reset config
   boxrecScraper.resetConfig()
+
   t.deepEqual(boxrecScraper.config, boxrecScraper.defaultConfig)
 
+  // configuring auth credentials
   const authCredentials = {
     email: 'updated',
     password: 'updated'
@@ -47,15 +74,15 @@ test('config', (t) => {
   boxrecScraper.configureAuthCredentials(authCredentials)
 
   t.deepEqual(boxrecScraper.config.auth, authCredentials)
+
+
+  // reset config
   boxrecScraper.resetConfig()
   t.deepEqual(boxrecScraper.config, boxrecScraper.defaultConfig)
 })
 
 test('scrap events ids', async (t) => {
-  boxrecScraper.configureAuthCredentials({
-    email: 'stackdumper',
-    password: 'unsafe_password'
-  })
+  const { boxrecScraper } = t.context
 
   const eventsIds = await boxrecScraper.scrapers.scrapEventsIds({
     offset: 0,
@@ -75,28 +102,50 @@ test('scrap events ids', async (t) => {
   t.is(eventsIds[1], eventsIds2[0])
 })
 
-test('scrap fighter', async (t) => {
-  boxrecScraper.configureAuthCredentials({
-    email: 'stackdumper',
-    password: 'unsafe_password'
-  })
+test('scrap event', async (t) => {
+  const { boxrecScraper } = t.context
 
-  const fighter = await boxrecScraper.scrapers.scrapFighter('447121')
+  const event = await boxrecScraper.scrapers.scrapEvent('754460')
+
+  t.truthy(event)
+  t.truthy(event.date)
+  t.truthy(event.titles)
+  t.truthy(event.fights)
+
+  t.is(event.date, 'Wednesday 26, July 2017')
+
+  t.is(event.titles.length, 1)
+  t.is(event.titles[0], 'World Boxing Association Fedelatin Welterweight Title')
+
+  t.is(event.fights.length, 9)
+  t.deepEqual(event.fights[1], {
+    boxrecId: '2176798',
+    weightClass: 'super lightweight',
+    fighters: ['746605', '385951'] 
+  })
+  
+  t.pass()
+})
+
+test('scrap fighter', async (t) => {
+  const { boxrecScraper } = t.context
+
+  const fighter = await boxrecScraper.scrapers.scrapFighter('474')
 
   t.deepEqual(fighter, {
-    id: '447121',
+    id: '474',
     role: 'boxer',
-    bouts: '33',
-    rounds: '177',
-    KOs: '73%',
-    status: 'active',
-    born: '1987-09-2',
+    bouts: '58',
+    rounds: '215',
+    KOs: '76%',
+    status: 'inactive',
+    born: '1966-06-3',
     nationality: 'USA',
-    debut: '2008-03-14',
-    division: 'welterweight',
-    residence: 'Omaha, Nebraska, USA',
-    birthPlace: 'Omaha, Nebraska, USA',
-    name: 'Terence Crawford',
-    image: 'http://static.boxrec.com/thumb/7/70/Crawford_Terence.jpg/200px-Crawford_Terence.jpg'
+    debut: '1985-03-06',
+    division: 'heavyweight',
+    residence: 'Henderson, Nevada, USA',
+    birthPlace: 'Brooklyn, New York, USA',
+    name: 'Mike Tyson',
+    image: 'http://static.boxrec.com/thumb/b/b3/Tyson-1a.jpg/200px-Tyson-1a.jpg',
   }) 
 })
