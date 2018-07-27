@@ -13,11 +13,6 @@ test.beforeEach((t) => {
 })
 
 test('initialization', (t) => {
-  console.log(
-    '1994-02-0'.split('-').map
-    
-  );
-  
   const { boxrecScraper } = t.context
   t.truthy(boxrecScraper)
 
@@ -144,6 +139,7 @@ test('scrap fighter', async (t) => {
     rounds: '215',
     KOs: '76%',
     status: 'inactive',
+    alias: 'Iron',
     born: new Date(1966, 6, 3),
     nationality: 'USA',
     debut: '1985-03-06',

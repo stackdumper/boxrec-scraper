@@ -16,12 +16,13 @@ const labelKeys = {
   'rounds': 'rounds',
   'KOs': 'KOs',
   'status': 'status',
+  'alias': 'alias',
   'born': 'born',
   'nationality': 'nationality',
   'debut': 'debut',
   'division': 'division',
   'residence': 'residence',
-  'birth place': 'birthPlace'
+  'birth place': 'birthPlace',
 }
 
 const processors = {
