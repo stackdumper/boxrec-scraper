@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom'
 
 
 const CARD_DATE_SELECTOR = '#eventResults > thead:nth-child(1) > tr > td > table > tbody > tr:nth-child(1) > td > h2'
-const CARD_TITLE_SELECTOR = '.titleLink'
+const CARD_TITLES_SELECTOR = '.titleLink'
 const FIGHTS_ROWS_SELECTOR = '#eventResults > tbody:nth-child(3) > tr'
 
 export const extractEvent = (boxrecScraper) => (html) => {
@@ -11,16 +11,16 @@ export const extractEvent = (boxrecScraper) => (html) => {
 
   return {
     date: document.querySelector(CARD_DATE_SELECTOR)?.textContent?.trim(),
-    fights: document.querySelectorAll(FIGHTS_ROWS_SELECTOR)
-      |> R.drop(1)
-      |> R.filter(el => el.childNodes.length !== 1)
-      |> R.map(boxrecScraper.extractors.extractFight),
-    titles: document.querySelectorAll(CARD_TITLE_SELECTOR)
+    titles: document.querySelectorAll(CARD_TITLES_SELECTOR)
       |> R.map(
         R.pipe(
           R.prop('textContent'),
           R.trim,
         )
-      )
+      ),
+    fights: document.querySelectorAll(FIGHTS_ROWS_SELECTOR)
+      |> R.drop(1)
+      |> R.filter(el => el.childNodes.length !== 1)
+      |> R.map(boxrecScraper.extractors.extractFight),
   }
 }

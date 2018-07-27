@@ -7,5 +7,5 @@ export const extractFight = () => (el) => ({
   fighters: R.map(
     a => a.href |> R.split('/') |> R.last,
     el.querySelectorAll('.personLink')
-  )
+  ),
 })
