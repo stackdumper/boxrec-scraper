@@ -21,6 +21,8 @@ const labelKeys = {
   'nationality': 'nationality',
   'debut': 'debut',
   'division': 'division',
+  'stance': 'stance',
+  'height': 'height',
   'residence': 'residence',
   'birth place': 'birthPlace',
 }
@@ -30,7 +32,7 @@ const processors = {
     R.take(9),
     R.pipe(
       R.split('-'),
-      date => new Date(...date),
+      ([year, month, date]) => `${year}-${('0' + month).slice(-2)}-${('0' + date).slice(-2)}`,
     )
   )
 }
