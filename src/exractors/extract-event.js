@@ -19,8 +19,29 @@ export const extractEvent = (boxrecScraper) => (html) => {
         )
       ),
     fights: document.querySelectorAll(FIGHTS_ROWS_SELECTOR)
-      |> R.drop(1)
-      |> R.filter(el => el.childNodes.length !== 1)
+      |> R.addIndex(R.reduce)(
+        (acc, cur, index) => {
+          console.log(acc);
+          
+          if (cur.childNodes.length === 1) {
+            console.log(cur.className);
+            
+            if (cur.className.split(' ').includes('SR')) {
+              acc[index - 1].secondRow = cur
+              
+              return acc
+            }
+          } else {
+            return [
+              ...acc,
+              cur,
+            ]
+          }
+        },
+        []
+      )
       |> R.map(boxrecScraper.extractors.extractFight),
+      // |> R.filter(el => el.childNodes.length !== 1)
+      // |> R.map(boxrecScraper.extractors.extractFight),
   }
 }

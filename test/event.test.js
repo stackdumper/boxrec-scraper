@@ -43,12 +43,17 @@ test('scrap event', async (t) => {
   t.is(event.titles.length, 1)
   t.is(event.titles[0], 'World Boxing Association Fedelatin Welterweight Title')
 
-  t.is(event.fights.length, 9)
+  t.is(event.fights.length, 10)
   t.deepEqual(event.fights[1], {
     boxrecId: '2176798',
     division: 'super lightweight',
     fighters: ['746605', '385951'],
+    titles: [],
   })
+
+  t.truthy(event.fights[0].titles)
+  t.is(event.fights[0].titles.length, 1)
+  t.is(event.fights[0].titles[0], "World Boxing Association Fedelatin Welterweight Title")
 
   t.pass()
 })
