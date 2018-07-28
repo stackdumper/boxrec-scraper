@@ -1,6 +1,6 @@
 {
   "name": "boxrec-scraper",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "main": "build/index.js",
   "author": "stackdumper <stackdumper@gmail.com>",
   "license": "MIT",
