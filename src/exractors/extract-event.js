@@ -20,12 +20,8 @@ export const extractEvent = (boxrecScraper) => (html) => {
       ),
     fights: document.querySelectorAll(FIGHTS_ROWS_SELECTOR)
       |> R.addIndex(R.reduce)(
-        (acc, cur, index) => {
-          console.log(acc);
-          
-          if (cur.childNodes.length === 1) {
-            console.log(cur.className);
-            
+        (acc, cur, index) => {          
+          if (cur.childNodes.length === 1) {            
             if (cur.className.split(' ').includes('SR')) {
               acc[index - 1].secondRow = cur
               
