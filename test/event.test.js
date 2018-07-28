@@ -62,6 +62,7 @@ test('scrap another event', async (t) => {
 
   t.truthy(event)
   t.is(event.date, 'Saturday 28, July 2018')
-  t.deepEqual(event.titles, ['South American Bantamweight Title'])
+  t.deepEqual(event.titles, ['South American Bantamweight Title'])  
   t.is(event.fights.length, 6)
+  t.deepEqual(event.fights[1].titles, ['South American Bantamweight Title'])
 })
