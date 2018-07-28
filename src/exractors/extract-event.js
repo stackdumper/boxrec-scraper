@@ -23,7 +23,9 @@ export const extractEvent = (boxrecScraper) => (html) => {
         (acc, cur, index) => {          
           if (cur.childNodes.length === 1) {            
             if (cur.className.split(' ').includes('SR')) {
-              acc[index - 1].secondRow = cur
+              if (acc[index - 1]) {
+                acc[index - 1].secondRow = cur
+              }
               
               return acc
             }
