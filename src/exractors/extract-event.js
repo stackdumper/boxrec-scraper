@@ -26,15 +26,15 @@ export const extractEvent = (boxrecScraper) => (html) => {
               if (acc[index - 1]) {
                 acc[index - 1].secondRow = cur
               }
-              
-              return acc
             }
-          } else {
-            return [
-              ...acc,
-              cur,
-            ]
+            
+            return acc
           }
+
+          return [
+            ...acc,
+            cur,
+          ]
         },
         []
       )

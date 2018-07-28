@@ -54,3 +54,14 @@ test('scrap event', async (t) => {
 
   t.pass()
 })
+
+test('scrap another event', async (t) => {
+  const { boxrecScraper } = t.context
+
+  const event = await boxrecScraper.scrapers.scrapEvent('771965')
+
+  t.truthy(event)
+  t.is(event.date, 'Saturday 28, July 2018')
+  t.deepEqual(event.titles, ['South American Bantamweight Title'])
+  t.is(event.fights.length, 6)
+})
