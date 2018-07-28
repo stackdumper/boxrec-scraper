@@ -13,6 +13,7 @@ import { extractFighter } from './exractors/extract-fighter'
 // import requestors
 import { getHTML } from './requestors/get-html'
 
+
 // export generator
 export const createBoxrecScraper = (config = {}) => {
   const defaultConfig = {

@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "ava"
+  ],
+  "extends": "plugin:ava/recommended",
+  "rules": {
+    "no-param-reassign": "off",
+    "no-magic-numbers": "off"
+  }
+}

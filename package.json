@@ -7,7 +7,7 @@
   "scripts": {
     "start": "babel-node src/index.js",
     "test": "ava test -v",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint test",
     "build": "rollup -c",
     "prepublish": "yarn build"
   },
@@ -27,6 +27,7 @@
     "ava": "^1.0.0-beta.6",
     "babel-eslint": "^9.0.0-beta.3",
     "eslint": "^5.0.0-rc.0",
+    "eslint-plugin-ava": "^5.0.0",
     "rollup": "^0.63.4",
     "rollup-plugin-babel": "^4.0.0-beta.7",
     "rollup-plugin-babel-minify": "^5.0.0",
