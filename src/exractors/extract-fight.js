@@ -4,7 +4,7 @@ import R from 'ramda'
 const FIGHT_TITLES_SELECTOR = '.titleLink'
 
 export const extractFight = () => (el) => ({
-  boxrecId: el.id,
+  id: el.id,
   division: el.querySelector('td:nth-child(2)')?.textContent?.trim(),
   fighters: R.map(
     a => a.href |> R.split('/') |> R.last,

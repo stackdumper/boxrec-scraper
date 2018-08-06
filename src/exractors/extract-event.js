@@ -5,11 +5,13 @@ import { JSDOM } from 'jsdom'
 const CARD_DATE_SELECTOR = '#eventResults > thead:nth-child(1) > tr > td > table > tbody > tr:nth-child(1) > td > h2'
 const CARD_TITLES_SELECTOR = '.titleLink'
 const FIGHTS_ROWS_SELECTOR = '#eventResults > tbody:nth-child(3) > tr'
+const CARD_ID_SELECTOR = '#eventResults > thead:nth-child(1) > tr > td > table > tbody > tr:nth-child(1) > td > div.desktop > div > a'
 
 export const extractEvent = (boxrecScraper) => (html) => {
   const { window: { document } } = new JSDOM(html)
 
   return {
+    id: document.querySelector(CARD_ID_SELECTOR).href?.split(':').pop(),
     date: document.querySelector(CARD_DATE_SELECTOR)?.textContent?.trim(),
     titles: document.querySelectorAll(CARD_TITLES_SELECTOR)
       |> R.map(

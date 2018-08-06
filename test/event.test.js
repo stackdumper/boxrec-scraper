@@ -38,18 +38,19 @@ test('scrap event', async (t) => {
   t.truthy(event.titles)
   t.truthy(event.fights)
 
+  t.is(event.id, '754460')
   t.is(event.date, 'Wednesday 26, July 2017')
 
   t.is(event.titles.length, 1)
   t.is(event.titles[0], 'World Boxing Association Fedelatin Welterweight Title')
-  
+
 
   t.is(event.fights.length, 10)
   t.deepEqual(event.fights[0], {
-    boxrecId: '2176794',
+    id: '2176794',
     division: 'welterweight',
-    fighters: [ '723287', '240119' ],
-    titles: [ 'World Boxing Association Fedelatin Welterweight Title' ]
+    fighters: ['723287', '240119'],
+    titles: ['World Boxing Association Fedelatin Welterweight Title'],
   })
 
   t.pass()
@@ -62,7 +63,10 @@ test('scrap another event', async (t) => {
 
   t.truthy(event)
   t.is(event.date, 'Saturday 28, July 2018')
-  t.deepEqual(event.titles, ['South American Bantamweight Title'])  
+  t.deepEqual(event.titles, [
+    'interim South American Lightweight Title',
+    'South American Bantamweight Title',
+  ])
   t.is(event.fights.length, 6)
   t.deepEqual(event.fights[1].titles, ['South American Bantamweight Title'])
 })
