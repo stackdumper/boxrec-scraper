@@ -10,7 +10,6 @@ const DATA_NODES_SELECTORS = [
 ]
 
 const labelKeys = {
-  'global ID': 'id',
   'role': 'role',
   'bouts': 'bouts',
   'rounds': 'rounds',
@@ -37,7 +36,7 @@ const processors = {
   )
 }
 
-export const extractFighter = () => async (html) => {
+export const extractFighter = () => async (html, id) => {
   const { window: { document } } = new JSDOM(html)
 
   return R.pipe(
@@ -60,6 +59,7 @@ export const extractFighter = () => async (html) => {
       {},
     ),
     R.assoc('name', document.querySelector(NAME_SELECTOR)?.textContent),
-    R.assoc('image', document.querySelector(IMAGE_SELECTOR)?.src)
+    R.assoc('image', document.querySelector(IMAGE_SELECTOR)?.src),
+    R.assoc('id', id)
   )(DATA_NODES_SELECTORS)    
 }

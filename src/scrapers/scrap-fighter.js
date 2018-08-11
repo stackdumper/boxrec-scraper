@@ -11,5 +11,5 @@ export const scrapFighter = (boxrecScraper) => async (fighterId) => {
     )
   )
 
-  return boxrecScraper.extractors.extractFighter(html)
+  return boxrecScraper.extractors.extractFighter(html, fighterId)
 }
