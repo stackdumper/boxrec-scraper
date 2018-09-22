@@ -8,6 +8,9 @@ const DATA_NODES_SELECTORS = [
   `#pageOuter > div > div.content > div.columnBox > div.filterBar > div.singleColumn > table > tbody > tr.profileTable > td:nth-child(2) > div:nth-child(1) > table > tbody > tr`,
   `#pageOuter > div > div.content > div.columnBox > div.filterBar > div.singleColumn > table > tbody > tr.profileTable > td:nth-child(2) > div:nth-child(2) > table > tbody > tr`
 ]
+const WON_SELECTOR = '#pageOuter > div > div.content > div.columnBox > div.filterBar > div.singleColumn > table > tbody > tr.profileTable > td:nth-child(1) > div > div > table > tbody > tr:nth-child(1) > td.bgW'
+const LOST_SELECTOR = '#pageOuter > div > div.content > div.columnBox > div.filterBar > div.singleColumn > table > tbody > tr.profileTable > td:nth-child(1) > div > div > table > tbody > tr:nth-child(1) > td.bgL'
+const DRAW_SELECTOR = '#pageOuter > div > div.content > div.columnBox > div.filterBar > div.singleColumn > table > tbody > tr.profileTable > td:nth-child(1) > div > div > table > tbody > tr:nth-child(1) > td.bgD'
 
 const labelKeys = {
   'role': 'role',
@@ -60,6 +63,9 @@ export const extractFighter = () => async (html, id) => {
     ),
     R.assoc('name', document.querySelector(NAME_SELECTOR)?.textContent),
     R.assoc('image', document.querySelector(IMAGE_SELECTOR)?.src),
+    R.assoc('won', document.querySelector(WON_SELECTOR)?.textContent),
+    R.assoc('lost', document.querySelector(LOST_SELECTOR)?.textContent),
+    R.assoc('draw', document.querySelector(DRAW_SELECTOR)?.textContent),
     R.assoc('id', id)
   )(DATA_NODES_SELECTORS)    
 }

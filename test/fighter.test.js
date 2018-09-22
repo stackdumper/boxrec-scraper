@@ -12,6 +12,9 @@ test('scrap fighter', async (t) => {
 
   const fighter = await boxrecScraper.scrapers.scrapFighter('474')
 
+  console.log(fighter);
+  
+
   t.deepEqual(fighter, {
     id: '474',
     role: 'boxer',
@@ -29,6 +32,9 @@ test('scrap fighter', async (t) => {
     residence: 'Henderson, Nevada, USA',
     birthPlace: 'Brooklyn, New York, USA',
     name: 'Mike Tyson',
-    image: 'http://static.boxrec.com/thumb/b/b3/Tyson-1a.jpg/200px-Tyson-1a.jpg',
+    image: 'http://static.boxrec.com/thumb/a/ad/MikeTyson-1a.jpg/200px-MikeTyson-1a.jpg',
+    won: '50',
+    lost: '6',
+    draw: '0',
   })
 })
