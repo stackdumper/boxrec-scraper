@@ -12,9 +12,6 @@ test('scrap fighter', async (t) => {
 
   const fighter = await boxrecScraper.scrapers.scrapFighter('474')
 
-  console.log(fighter);
-  
-
   t.deepEqual(fighter, {
     id: '474',
     role: 'boxer',

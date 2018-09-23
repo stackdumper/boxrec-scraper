@@ -1,11 +1,14 @@
 {
   "presets": [
-    "@babel/preset-stage-1",
+    "@babel/typescript",
     ["@babel/preset-env", {
       "modules": false,
       "targets": {
         "node": "6.11.5"
       }
     }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining"
   ]
 }

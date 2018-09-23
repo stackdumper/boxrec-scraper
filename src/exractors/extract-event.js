@@ -13,17 +13,16 @@ export const extractEvent = (boxrecScraper) => (html) => {
   return {
     id: document.querySelector(CARD_ID_SELECTOR).href?.split(':').pop(),
     date: document.querySelector(CARD_DATE_SELECTOR)?.textContent?.trim(),
-    titles: document.querySelectorAll(CARD_TITLES_SELECTOR)
-      |> R.map(
-        R.pipe(
-          R.prop('textContent'),
-          R.trim,
-        )
-      ),
-    fights: document.querySelectorAll(FIGHTS_ROWS_SELECTOR)
-      |> R.addIndex(R.reduce)(
+    titles: R.map(
+      R.pipe(
+        R.prop('textContent'),
+        R.trim,
+      )
+    )(document.querySelectorAll(CARD_TITLES_SELECTOR)),
+    fights: R.pipe(
+      R.addIndex(R.reduce)(
         (acc, cur, index) => {
-          if (isNaN(parseInt(cur.id))) {            
+          if (isNaN(parseInt(cur.id))) {
             if (acc.length > 0) {
               acc[acc.length - 1].secondRow = cur
             }
@@ -37,9 +36,10 @@ export const extractEvent = (boxrecScraper) => (html) => {
           ]
         },
         []
-      )
-      |> R.map(boxrecScraper.extractors.extractFight),
-      // |> R.filter(el => el.childNodes.length !== 1)
-      // |> R.map(boxrecScraper.extractors.extractFight),
+      ),
+      R.map(boxrecScraper.extractors.extractFight),
+      // R.filter(el => el.childNodes.length !== 1)
+      // R.map(boxrecScraper.extractors.extractFight),
+    )(document.querySelectorAll(FIGHTS_ROWS_SELECTOR)),
   }
 }

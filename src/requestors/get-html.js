@@ -15,6 +15,6 @@ export const getHTML = (boxrecScrapper) => async (uri) => {
     jar: true,
     resolveWithFullResponse: true,
   })
-  
+
   return typeof res === 'string' ? res : res.body
 }

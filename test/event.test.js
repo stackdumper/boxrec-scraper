@@ -13,7 +13,7 @@ test('scrap events ids', async (t) => {
   const eventsIds = await boxrecScraper.scrapers.scrapEventsIds({
     offset: 0,
     limit: 30,
-  })
+  })  
 
   t.truthy(eventsIds)
   t.is(eventsIds.length, 30)

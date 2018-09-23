@@ -18,10 +18,11 @@ export const handleAuthorization = (boxrecScrapper) => async (res) => {
         jar: true,
         formData: {
           _username: email,
-          _password:  password,
-        }
+          _password: password,
+        },
       })
-    } catch (error) {
+    }
+    catch (error) {
       // 302 - redirect (it is OK)
     }
 

@@ -25,7 +25,7 @@ export const createBoxrecScraper = (config = {}) => {
     auth: {
       email: null,
       password: null,
-    }
+    },
   }
 
   const boxrecScraper = {
@@ -47,7 +47,7 @@ export const createBoxrecScraper = (config = {}) => {
       auth: {
         email,
         password,
-      }
+      },
     }
   )
 
